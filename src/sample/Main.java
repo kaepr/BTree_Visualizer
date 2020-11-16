@@ -17,6 +17,8 @@ public class Main extends Application {
 
     //Initializing necessary variables
     private Operations<Integer> btree = new Operations<>();
+    TextField addInput = new TextField();
+
 
 
     @Override
@@ -38,7 +40,6 @@ public class Main extends Application {
         upperArea.setStyle("-fx-background-color: #4e99e3;");
 
         //Buttons and input fields
-        TextField addInput = new TextField();
         addInput.setPrefWidth(50);
         Label lbl = new Label("ENTER NODE : ");
         Button insert = new Button("INSERT");
@@ -112,6 +113,7 @@ public class Main extends Application {
     private void resetTree() {
         try {
             System.out.println("Tree Reset");
+            addInput.setText("");
         } catch (Exception e) {
             System.out.println("Error occurred !");
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error occurred !");
