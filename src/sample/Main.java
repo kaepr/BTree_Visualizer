@@ -40,7 +40,7 @@ public class Main extends Application {
         //Buttons and input fields
         TextField addInput = new TextField();
         addInput.setPrefWidth(50);
-        Label lbl = new Label("Enter number : ");
+        Label lbl = new Label("ENTER NODE : ");
         Button insert = new Button("INSERT");
         Button delete = new Button("DELETE");
         Button reset = new Button("RESET");
@@ -60,6 +60,10 @@ public class Main extends Application {
         delete.setOnMouseClicked(e -> deleteNode(Integer.parseInt(addInput.getText())));
         search.setOnMouseClicked(e -> searchNode(Integer.parseInt(addInput.getText())));
         reset.setOnMouseClicked(e -> resetTree());
+
+
+
+        //Tree Viewing Section
 
         Scene scene1 = new Scene(root);
 
