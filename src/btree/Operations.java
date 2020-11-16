@@ -9,7 +9,7 @@ public class Operations<T extends Comparable<T>> {
     private int size;       // The number of tree elements
     private boolean flag;   // Tracks if the last element was added correctly or not.
 
-    Operations() {
+    public Operations() {
         this.root = new Node();
         this.size = 0;
     }
