@@ -1,21 +1,18 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.animation.RotateTransition;
-import javafx.application.Application;
-import javafx.scene.shape.Polygon;
+import javafx.scene.control.Button;
+import javafx.geometry.Insets;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
-import static javafx.application.Application.launch;
-
-import javafx.scene.Group;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 import java.awt.*;
 
@@ -32,8 +29,24 @@ public class Main extends Application {
         primaryStage.setHeight(700);
         VBox root = new VBox();
 
-        Label label1 = new Label("This is a text label");
-        root.getChildren().add(label1);
+        HBox upperArea = new HBox();
+        upperArea.setPadding(new Insets(15, 12, 15, 12));
+        upperArea.setSpacing(20);
+        upperArea.setStyle("-fx-background-color: #4e99e3;");
+
+        Button insert = new Button("INSERT");
+        Button delete = new Button("DELETE");
+        Button reset = new Button("RESET");
+        Button search = new Button("SEARCH");
+        insert.setStyle("-fx-background-color: slateblue; -fx-text-fill: white; -fx-font-weight: bold;");
+        delete.setStyle("-fx-background-color: slateblue; -fx-text-fill: white; -fx-font-weight: bold;");
+        reset.setStyle("-fx-background-color: slateblue; -fx-text-fill: white; -fx-font-weight: bold;");
+        search.setStyle("-fx-background-color: slateblue; -fx-text-fill: white; -fx-font-weight: bold;");
+
+        upperArea.getChildren().addAll(insert, delete, search, reset);
+        upperArea.setAlignment(Pos.CENTER);
+        root.getChildren().addAll(upperArea);
+
 
         Scene scene1 = new Scene(root);
 
