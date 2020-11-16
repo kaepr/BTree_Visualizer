@@ -17,7 +17,7 @@ public class Main extends Application {
 
     //Initializing necessary variables
     private Operations<Integer> btree = new Operations<>();
-    TextField addInput = new TextField();
+    private TextField addInput = new TextField();
 
 
 
@@ -65,6 +65,9 @@ public class Main extends Application {
 
 
         //Tree Viewing Section
+        TreeArea BTREEPane = new TreeArea(btree, 500, 80);
+
+
 
         Scene scene1 = new Scene(root);
 
