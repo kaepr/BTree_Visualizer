@@ -56,9 +56,9 @@ public class Main extends Application {
         root.getChildren().addAll(upperArea);
 
 
-        insert.setOnMouseClicked(e -> insertNode(Integer.parseInt(addInput.getText())));
-        delete.setOnMouseClicked(e -> deleteNode(Integer.parseInt(addInput.getText())));
-        search.setOnMouseClicked(e -> searchNode(Integer.parseInt(addInput.getText())));
+        insert.setOnMouseClicked(e -> insertNode(addInput.getText()));
+        delete.setOnMouseClicked(e -> deleteNode(addInput.getText()));
+        search.setOnMouseClicked(e -> searchNode(addInput.getText()));
         reset.setOnMouseClicked(e -> resetTree());
 
 
@@ -72,8 +72,9 @@ public class Main extends Application {
 
     }
 
-    private void insertNode(int num) {
+    private void insertNode(String s) {
         try {
+            int num = Integer.parseInt(s);
             System.out.println("Node added is " + num);
             btree.add(num);
         } catch (NumberFormatException e) {
@@ -83,8 +84,9 @@ public class Main extends Application {
         }
     }
 
-    private void searchNode(int num) {
+    private void searchNode(String s) {
         try {
+            int num = Integer.parseInt(s);
             System.out.println("Node searched is " + num);
             btree.add(num);
         } catch (NumberFormatException e) {
@@ -94,8 +96,9 @@ public class Main extends Application {
         }
     }
 
-    private void deleteNode(int num) {
+    private void deleteNode(String s) {
         try {
+            int num = Integer.parseInt(s);
             System.out.println("Node deleted is " + num);
             btree.add(num);
         } catch (NumberFormatException e) {
