@@ -576,4 +576,33 @@ public class Operations<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Method to find height of a binary tree!
+     */
+
+    public int getHeight(Node curr) {
+        if (curr != null) {
+            int ldepth = getHeight(curr.leftChild);
+            int rdepth = getHeight(curr.rightChild);
+            if (ldepth > rdepth)
+                return (ldepth + 1);
+            else
+                return (rdepth + 1);
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public int getHeight() {
+        if(isEmpty()){
+            return 0;
+        }
+        else {
+            return getHeight(root);
+        }
+    }
+
+
+
 }

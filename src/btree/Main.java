@@ -22,7 +22,8 @@ public class Main {
             System.out.println("7) Get minimum value");
             System.out.println("8) Get maximum value");
             System.out.println("9) Display tree");
-            System.out.println("10) Exit...\n");
+            System.out.println("10) Display Height");
+            System.out.println("11) Exit...\n");
 
             try {
                 System.out.print("Enter your choice: ");
@@ -83,6 +84,10 @@ public class Main {
                         break;
                     }
                     case 10: {
+                        System.out.println("Height of tree: " + tree.getHeight());
+                        break;
+                    }
+                    case 11: {
                         return;
                     }
                     default: {
