@@ -32,6 +32,11 @@ public class Main {
                     case 1: {
                         System.out.print("Enter integer element to insert: ");
                         tree.add(scanner.nextInt());
+                        System.out.println("Root element is : " + tree.getRoot().getLeftElement());
+                        System.out.println("Root, right element is : " + tree.getRoot().getRightElement());
+                        System.out.println("Root, left child is : " + tree.getRoot().getLeftNode());
+                        System.out.println("Root, middle child is : " + tree.getRoot().getMidNode());
+                        System.out.println("Root, right child is : " +tree.getRoot().getRightNode());
                         break;
                     }
                     case 2: {

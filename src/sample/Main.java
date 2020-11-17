@@ -4,14 +4,13 @@ import btree.Operations;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 import javafx.geometry.Insets;
-import javafx.scene.control.TextField;
 
 public class Main extends Application {
 
@@ -19,18 +18,21 @@ public class Main extends Application {
     private Operations<Integer> btree;
     private TextField addInput = new TextField();
     private TreeArea BTREEPane;
+    private int addValue = 1;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         //primaryStage.setScene(new Scene(root, 300, 275));
         btree = new Operations<>();
+        double screenWidth = 1500;
+        double screenHeight = 700;
         primaryStage.setTitle("B Tree Visualizer");
-        primaryStage.setWidth(1000);
-        primaryStage.setHeight(700);
+        primaryStage.setWidth(screenWidth);
+        primaryStage.setHeight(screenHeight);
 
-        //Starting VBox
-        VBox root = new VBox();
+        //Starting Borderpane
+        BorderPane root = new BorderPane();
 
         //Horizontal Box containing all buttons and input field
         HBox upperArea = new HBox();
@@ -39,6 +41,7 @@ public class Main extends Application {
         upperArea.setStyle("-fx-background-color: #4e99e3;");
 
         //Buttons and input fields
+        addInput.setText("1");
         addInput.setPrefWidth(50);
         Label lbl = new Label("ENTER NODE : ");
         Button insert = new Button("INSERT");
@@ -53,7 +56,8 @@ public class Main extends Application {
 
         upperArea.getChildren().addAll(lbl, addInput, insert, delete, search, reset);
         upperArea.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(upperArea);
+        root.setTop(upperArea);
+        //.getChildren().addAll(upperArea);
 
 
         insert.setOnMouseClicked(e -> insertNode(addInput.getText()));
@@ -61,10 +65,22 @@ public class Main extends Application {
         search.setOnMouseClicked(e -> searchNode(addInput.getText()));
         reset.setOnMouseClicked(e -> resetTree());
 
-
+        AnchorPane anchorPane = new AnchorPane();
+        //ScrollPane
+        ScrollPane sp = new ScrollPane();
+        BTREEPane = new TreeArea(btree, screenWidth/2, 80);
+        //sp.setPrefSize(1000, 800);
+        sp.setContent(BTREEPane);
+        sp.fitToHeightProperty().set(false);
+        sp.fitToWidthProperty().set(false);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        sp.setPannable(true);
         //Tree Viewing Section
-        BTREEPane = new TreeArea(btree, 500, 80);
-        root.getChildren().addAll(BTREEPane);
+        //anchorPane.getChildren().addAll(sp);
+
+        root.setCenter(sp);
+//       root.getChildren().addAll(sp);
 
 
         Scene scene1 = new Scene(root);
@@ -78,7 +94,10 @@ public class Main extends Application {
         try {
             int num = Integer.parseInt(s);
             System.out.println("Node added is " + num);
-            this.btree.add(num);
+
+
+            this.btree.add(addValue);
+            addValue++;
             System.out.println("First inorder");
             this.btree.inOrder();
             System.out.println("");
@@ -91,9 +110,17 @@ public class Main extends Application {
                 System.out.println("its empty qeqeqweqasdasdasdasdase ");
             }
             BTREEPane.getChildren().clear();
+
+            System.out.println("Checking what children the tree has");
+            System.out.println("Root element is : " + this.btree.getRoot().getLeftElement());
+            System.out.println("Root, right element is : " + this.btree.getRoot().getRightElement());
+            System.out.println("Root, left child is : " + this.btree.getRoot().getLeftNode());
+            System.out.println("Root, middle child is : " + this.btree.getRoot().getMidNode());
+            System.out.println("Root, right child is : " + this.btree.getRoot().getRightNode());
+
             BTREEPane.makeTree(this.btree);
 
-            addInput.setText("");
+            addInput.setText("1");
             System.out.println("Goes here");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input format !");
