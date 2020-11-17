@@ -16,16 +16,15 @@ import javafx.scene.control.TextField;
 public class Main extends Application {
 
     //Initializing necessary variables
-    private Operations<Integer> btree = new Operations<>();
+    private Operations<Integer> btree;
     private TextField addInput = new TextField();
-
-
+    private TreeArea BTREEPane;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         //primaryStage.setScene(new Scene(root, 300, 275));
-
+        btree = new Operations<>();
         primaryStage.setTitle("B Tree Visualizer");
         primaryStage.setWidth(1000);
         primaryStage.setHeight(700);
@@ -63,10 +62,9 @@ public class Main extends Application {
         reset.setOnMouseClicked(e -> resetTree());
 
 
-
         //Tree Viewing Section
-        TreeArea BTREEPane = new TreeArea(btree, 500, 80);
-
+        BTREEPane = new TreeArea(btree, 500, 80);
+        root.getChildren().addAll(BTREEPane);
 
 
         Scene scene1 = new Scene(root);
@@ -80,7 +78,23 @@ public class Main extends Application {
         try {
             int num = Integer.parseInt(s);
             System.out.println("Node added is " + num);
-            btree.add(num);
+            this.btree.add(num);
+            System.out.println("First inorder");
+            this.btree.inOrder();
+            System.out.println("");
+            if (this.btree.isEmpty()) {
+                System.out.println("its empty qeqeqweqe ");
+            }
+            System.out.println("Getting root node inside insert node main function");
+            System.out.println(this.btree.getRoot().getRightElement());
+            if (this.btree.isEmpty()) {
+                System.out.println("its empty qeqeqweqasdasdasdasdase ");
+            }
+            BTREEPane.getChildren().clear();
+            BTREEPane.makeTree(this.btree);
+
+            addInput.setText("");
+            System.out.println("Goes here");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input format !");
             Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid input format !");
@@ -93,6 +107,9 @@ public class Main extends Application {
             int num = Integer.parseInt(s);
             System.out.println("Node searched is " + num);
             btree.add(num);
+            BTREEPane.getChildren().clear();
+            BTREEPane.makeTree(btree);
+            addInput.setText("");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input format !");
             Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid input format !");
@@ -104,7 +121,10 @@ public class Main extends Application {
         try {
             int num = Integer.parseInt(s);
             System.out.println("Node deleted is " + num);
-            btree.add(num);
+            btree.remove(num);
+            BTREEPane.getChildren().clear();
+            BTREEPane.makeTree(btree);
+            addInput.setText("");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input format !");
             Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid input format !");
@@ -116,6 +136,9 @@ public class Main extends Application {
     private void resetTree() {
         try {
             System.out.println("Tree Reset");
+            btree.clear();
+            BTREEPane.resetTree();
+            BTREEPane.getChildren().clear();
             addInput.setText("");
         } catch (Exception e) {
             System.out.println("Error occurred !");

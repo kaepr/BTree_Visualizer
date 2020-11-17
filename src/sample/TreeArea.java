@@ -6,18 +6,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import btree.Node;
+import javafx.scene.shape.Line;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
 public class TreeArea extends Pane {
-    private Operations<Integer> btree = new Operations<>();
+    private Operations<Integer> btree;
     private double startX, startY;
     private double nodeWidth = 35;
 
     public TreeArea(Operations<Integer> btree, double startX, double startY) {
+        System.out.println("going in tree area constructor");
         this.btree = btree;
         this.startX = startX;
         this.startY = startY;
@@ -27,10 +28,12 @@ public class TreeArea extends Pane {
         String s = Integer.toString(num);
         Rectangle node = new Rectangle(posX, posY, nodeWidth, nodeWidth);
         node.setFill(Color.rgb(24, 71, 102));
-        node.setArcWidth(20);
-        node.setArcHeight(20);
-        Text nodeValue = new Text(posX + 10 - s.length(), posY + 10, s);
+        node.setArcWidth(15);
+        node.setArcHeight(15);
+        Text nodeValue = new Text(posX + 13 - s.length(), posY + 20, s);
         nodeValue.setStyle("-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 14");
+        nodeValue.setFill(Color.WHITE);
+        nodeValue.setStrokeWidth(3);
         this.getChildren().addAll(node, nodeValue);
     }
 
@@ -53,6 +56,7 @@ public class TreeArea extends Pane {
                 if (root.getLeftNode() != null) {
                     children.add(root.getLeftNode());
                 }
+
                 if (root.getMidNode() != null) {
                     children.add(root.getMidNode());
                 }
@@ -63,18 +67,47 @@ public class TreeArea extends Pane {
                 if (root.isLeaf()) {
                     //Its a leaf node, so no children, hence no more things need to be rendered
                 } else {
-                    double updatedY = posY + 30;
+                    double updatedY = posY + 60;
+                    ArrayList<Integer> positionX = new ArrayList<>();
+                    positionX.add(-1);
+                    positionX.add(0);
+                    positionX.add(1);
                     for (int i = 0; i < children.size(); i++) {
-
+                        //to calculate new X
+                        double updatedX = posX + positionX.get(i) * 75;
+                        Line line = new Line(posX, posY + nodeWidth, updatedX, updatedY);
+                        line.setStroke(Color.BLACK);
+                        line.setStrokeWidth(3);
+                        this.getChildren().add(line);
+                        drawTree(children.get(i), updatedX, updatedY);
                     }
                 }
 
             }
         } catch (NullPointerException e) {
-            System.out.println("Null pointer error occured");
+            System.out.println("Null pointer error occurred");
         }
 
 
+    }
+
+    public void makeTree(Operations<Integer> newBTree) {
+        this.btree = new Operations<>();
+        System.out.println("Inorder from paramaterized makeTree");
+        newBTree.inOrder();
+        System.out.println("Making a new tree");
+        this.btree = newBTree;
+        System.out.println("InOrder inside make tree");
+
+        this.btree.inOrder();
+        drawTree(btree.getRoot(), startX, startY);
+        System.out.println(btree.getRoot());
+    }
+
+    public void resetTree() {
+        this.btree = new Operations<>();
+        this.btree.clear();
+        drawTree(btree.getRoot(), startX, startY);
     }
 
 

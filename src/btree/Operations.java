@@ -14,6 +14,10 @@ public class Operations<T extends Comparable<T>> {
         this.size = 0;
     }
 
+    public Node getRoot() {
+        return this.root;
+    }
+
     /**
      * @return true, the tree is empty, otherwise false
      */
@@ -588,21 +592,18 @@ public class Operations<T extends Comparable<T>> {
                 return (ldepth + 1);
             else
                 return (rdepth + 1);
-        }
-        else{
+        } else {
             return 0;
         }
     }
 
     public int getHeight() {
-        if(isEmpty()){
+        if (isEmpty()) {
             return 0;
-        }
-        else {
+        } else {
             return getHeight(root);
         }
     }
-
 
 
 }
