@@ -149,7 +149,7 @@ public class Main extends Application {
             System.out.println("Root, right child is : " + this.btree.getRoot().getRightNode());
 
             BTREEPane.makeTree(this.btree);
-            addInput.setText("");
+            addInput.setText("1");
             System.out.println("Goes here");
 
         } catch (NumberFormatException e) {
@@ -163,9 +163,18 @@ public class Main extends Application {
         try {
             int num = Integer.parseInt(s);
             System.out.println("Node searched is " + num);
-            btree.add(num);
-            BTREEPane.getChildren().clear();
-            BTREEPane.makeTree(btree);
+
+            if(btree.contains(num)){
+                System.out.println("Searching Now");
+                BTREEPane.searchTree(num);
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "The element does not exist !");
+                alert.show();
+            }
+
+
+            //BTREEPane.getChildren().clear();
+            //BTREEPane.makeTree(btree);
             addInput.setText("");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input format !");
