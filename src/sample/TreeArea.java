@@ -46,7 +46,7 @@ public class TreeArea extends Pane {
         } else {
             double width = this.lenX * treeHeight * 2;
 //            double width = 1000 * treeHeight * 2;
-            double height = 1000 * treeHeight;
+            double height = 500 * treeHeight;
             this.startX = width / 2;
             this.setPrefSize(width, height);
         }
