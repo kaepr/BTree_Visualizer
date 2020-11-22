@@ -144,8 +144,8 @@ public class Main extends Application {
         try {
             int num = Integer.parseInt(s);
 //            System.out.println("Node added is " + num);
-            this.btree.add(addValue);
-            addValue++;
+            this.btree.add(num);
+//            addValue++;
             //addInput.setText("1");
 //            System.out.println("First inorder");
 //            this.btree.inOrder();
