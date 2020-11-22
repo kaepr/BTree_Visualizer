@@ -29,6 +29,20 @@ public class TreeArea extends Pane {
         this.startY = startY;
     }
 
+    public void setSizeTreePane(int treeHeight) {
+        double currentWidth = this.getWidth();
+        if (treeHeight == 0) {
+            this.setPrefSize(1500, 800);
+        } else {
+            double width = 500* treeHeight;
+            double height = 700 * treeHeight;
+            this.startX = width/2;
+            this.setPrefSize(width, height);
+
+        }
+
+    }
+
     private void drawNode(int num, double posX, double posY, boolean isSearching) {
         String s = Integer.toString(num);
         Rectangle node = new Rectangle(posX, posY, nodeWidth, nodeWidth);
@@ -106,11 +120,11 @@ public class TreeArea extends Pane {
                     for (int i : children.keySet()) {
                         System.out.println(i);
                         double updatedX = posX + i * lengthX;
-                        Line line = new Line(posX+15, posY + nodeWidth, updatedX+10, updatedY);
+                        Line line = new Line(posX + 15, posY + nodeWidth, updatedX + 10, updatedY);
                         line.setStroke(Color.BLACK);
                         line.setStrokeWidth(3);
                         this.getChildren().add(line);
-                        drawTree(children.get(i), updatedX, updatedY, 0.65 * lengthX, 1.2 * lengthY, isSearch);
+                        drawTree(children.get(i), updatedX, updatedY, 0.65 * lengthX, 1.4 * lengthY, isSearch);
                     }
                 }
 
@@ -130,13 +144,14 @@ public class TreeArea extends Pane {
     }
 
     public void makeTree(Operations<Integer> newBTree) {
+
         this.btree = new Operations<>();
 //        System.out.println("Inorder from paramaterized makeTree");
 //        newBTree.inOrder();
 //        System.out.println("Making a new tree");
         this.btree = newBTree;
         //System.out.println("InOrder inside make tree");
-
+        this.setSizeTreePane(this.btree.getHeight());
         this.btree.inOrder();
         drawTree(btree.getRoot(), startX, startY, 300, 130, false);
         //System.out.println(btree.getRoot());

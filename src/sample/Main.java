@@ -26,18 +26,18 @@ public class Main extends Application {
     private Operations<Integer> btree;
     private TextField addInput = new TextField();
     private TreeArea BTREEPane;
-    //private int addValue = 1;
+    private int addValue = 1;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         //primaryStage.setScene(new Scene(root, 300, 275));
         btree = new Operations<>();
-        double screenWidth = 1500;
-        double screenHeight = 700;
+        //double screenWidth = 1300;
+        //double screenHeight = 600;
         primaryStage.setTitle("B Tree Visualizer");
-        primaryStage.setWidth(screenWidth);
-        primaryStage.setHeight(screenHeight);
+        primaryStage.setWidth(1500);
+        primaryStage.setHeight(800);
 
         //Starting Borderpane
         BorderPane root = new BorderPane();
@@ -95,10 +95,10 @@ public class Main extends Application {
         //setting up the handler functions
         insert.setOnMouseClicked(e-> {
             insertNode(addInput.getText());
-                txt1.setPrefWidth(40);
+            txt1.setPrefWidth(40);
             txt1.setText(String.valueOf(btree.getHeight()));
-                txt2.setText(String.valueOf(btree.getVertices()));
-                    });
+            txt2.setText(String.valueOf(btree.getVertices()));
+        });
         delete.setOnMouseClicked(e-> {
             deleteNode(addInput.getText());
             txt1.setPrefWidth(40);
@@ -113,17 +113,23 @@ public class Main extends Application {
             txt2.setText("0");
         });
 
-        AnchorPane anchorPane = new AnchorPane();
+        //AnchorPane anchorPane = new AnchorPane();
         //ScrollPane
+        //ScrollPane sp = new ScrollPane();
+
         ScrollPane sp = new ScrollPane();
-        BTREEPane = new TreeArea(btree, screenWidth/2, 80);
-        //sp.setPrefSize(1000, 800);
+        //sp.setPrefSize( primaryStage.getHeight(), primaryStage.getWidth());
+        System.out.println(primaryStage.getWidth());
+        BTREEPane = new TreeArea(btree, primaryStage.getWidth()/2, 80);
+        //sp.setPrefSize(300, 300);
         sp.setContent(BTREEPane);
-        sp.fitToHeightProperty().set(false);
-        sp.fitToWidthProperty().set(false);
-        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        sp.setFitToWidth(false);
+        sp.setFitToHeight(false);
+//        //sp.setPrefSize(1500, 700);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         sp.setPannable(true);
+
         //Tree Viewing Section
         //anchorPane.getChildren().addAll(sp);
 
@@ -137,10 +143,11 @@ public class Main extends Application {
 
     private void insertNode(String s) {
         try {
-
             int num = Integer.parseInt(s);
             System.out.println("Node added is " + num);
-            this.btree.add(num);
+            this.btree.add(addValue);
+            addValue++;
+            //addInput.setText("1");
             System.out.println("First inorder");
             this.btree.inOrder();
             System.out.println("");
@@ -162,7 +169,7 @@ public class Main extends Application {
             System.out.println("Root, right child is : " + this.btree.getRoot().getRightNode());
 
             BTREEPane.makeTree(this.btree);
-            addInput.setText("");
+            addInput.setText("1");
             System.out.println("Goes here");
 
         } catch (NumberFormatException e) {
