@@ -49,8 +49,8 @@ public class Main extends Application {
         upperArea.setStyle("-fx-background-color: #4e99e3;");
 
         //Horizontal Box containing Height and Vertices
-        HBox lowerArea =  new HBox();
-        lowerArea.setPadding(new Insets(15,12,15,12));
+        HBox lowerArea = new HBox();
+        lowerArea.setPadding(new Insets(15, 12, 15, 12));
         lowerArea.setSpacing(20);
         lowerArea.setStyle("-fx-background-color: #4e99e3;");
 
@@ -67,15 +67,11 @@ public class Main extends Application {
         delete.setStyle("-fx-background-color: slateblue; -fx-text-fill: white; -fx-font-weight: bold;");
         reset.setStyle("-fx-background-color: slateblue; -fx-text-fill: white; -fx-font-weight: bold;");
         search.setStyle("-fx-background-color: slateblue; -fx-text-fill: white; -fx-font-weight: bold;");
-        upperArea.getChildren().addAll(lbl, addInput, insert, delete, search, reset);
-        upperArea.setAlignment(Pos.CENTER);
-        root.setTop(upperArea);
-        //.getChildren().addAll(upperArea);
 
         //Displaying Height and Vertices
         Label l = new Label("HEIGHT: ");
         //String ss = String.valueOf(BTREEPane.displayHeight(this.btree)) ;
-        Label txt1= new Label();
+        Label txt1 = new Label();
         txt1.setPrefWidth(138);
         txt1.setText("TREE DOES NOT EXIST!");
         Label txt2 = new Label();
@@ -88,18 +84,21 @@ public class Main extends Application {
         txt1.setStyle("-fx-text-fill: black; -fx-font-size: 12; -fx-background-color: white");
         txt2.setStyle("-fx-text-fill: black; -fx-font-size: 12; -fx-background-color: white");
         l2.setStyle("-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 14");
-        lowerArea.getChildren().addAll(l,txt1,l2,txt2);
-        lowerArea.setAlignment(Pos.CENTER);
-        root.setBottom(lowerArea);
+
+        //Adding all elements in UpperArea
+        upperArea.getChildren().addAll(lbl, addInput, insert, delete, search, reset, l, txt1, l2, txt2);
+        upperArea.setAlignment(Pos.CENTER);
+        root.setTop(upperArea);
+
 
         //setting up the handler functions
-        insert.setOnMouseClicked(e-> {
+        insert.setOnMouseClicked(e -> {
             insertNode(addInput.getText());
             txt1.setPrefWidth(40);
             txt1.setText(String.valueOf(btree.getHeight()));
             txt2.setText(String.valueOf(btree.getVertices()));
         });
-        delete.setOnMouseClicked(e-> {
+        delete.setOnMouseClicked(e -> {
             deleteNode(addInput.getText());
             txt1.setPrefWidth(40);
             txt1.setText(String.valueOf(btree.getHeight()));
@@ -120,7 +119,7 @@ public class Main extends Application {
         ScrollPane sp = new ScrollPane();
         //sp.setPrefSize( primaryStage.getHeight(), primaryStage.getWidth());
         System.out.println(primaryStage.getWidth());
-        BTREEPane = new TreeArea(btree, primaryStage.getWidth()/2, 80);
+        BTREEPane = new TreeArea(btree, primaryStage.getWidth() / 2, 80);
         //sp.setPrefSize(300, 300);
         sp.setContent(BTREEPane);
         sp.setFitToWidth(false);
@@ -184,10 +183,10 @@ public class Main extends Application {
             int num = Integer.parseInt(s);
             System.out.println("Node searched is " + num);
 
-            if(btree.contains(num)){
+            if (btree.contains(num)) {
                 System.out.println("Searching Now");
                 BTREEPane.searchTree(num);
-            }else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "The element does not exist !");
                 alert.show();
             }

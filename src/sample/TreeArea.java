@@ -21,6 +21,11 @@ public class TreeArea extends Pane {
     private double nodeWidth = 35;
     private double searchNode = -1;
 
+    private double distBetweenNodes = 850;
+    private double verticalDistNodes = 350;
+    private double lenX = 300;
+    private double lenY = 80;
+
     public TreeArea(Operations<Integer> btree, double startX, double startY) {
         //this.setPrefSize(width, 800);
         //System.out.println("going in tree area constructor");
@@ -29,16 +34,21 @@ public class TreeArea extends Pane {
         this.startY = startY;
     }
 
+    public void setLengths(int treeHeight) {
+        this.lenX = this.lenX + 10*treeHeight;
+        this.lenY = this.lenY + 5 ;
+    }
+
     public void setSizeTreePane(int treeHeight) {
         double currentWidth = this.getWidth();
         if (treeHeight == 0) {
             this.setPrefSize(1500, 800);
         } else {
-            double width = 500* treeHeight;
-            double height = 700 * treeHeight;
-            this.startX = width/2;
+            double width = this.lenX * treeHeight * 2;
+//            double width = 1000 * treeHeight * 2;
+            double height = 1000 * treeHeight;
+            this.startX = width / 2;
             this.setPrefSize(width, height);
-
         }
 
     }
@@ -124,7 +134,7 @@ public class TreeArea extends Pane {
                         line.setStroke(Color.BLACK);
                         line.setStrokeWidth(3);
                         this.getChildren().add(line);
-                        drawTree(children.get(i), updatedX, updatedY, 0.65 * lengthX, 1.4 * lengthY, isSearch);
+                        drawTree(children.get(i), updatedX, updatedY, lengthX / 3, lengthY, isSearch);
                     }
                 }
 
@@ -137,7 +147,7 @@ public class TreeArea extends Pane {
     public void searchTree(int nodeValue) {
         try {
             this.searchNode = nodeValue;
-            drawTree(btree.getRoot(), startX, startY, 300, 130, true);
+            drawTree(btree.getRoot(), startX, startY, lenX, lenY, true);
         } catch (Exception e) {
             System.out.println("Error Occurred !");
         }
@@ -146,20 +156,18 @@ public class TreeArea extends Pane {
     public void makeTree(Operations<Integer> newBTree) {
 
         this.btree = new Operations<>();
-//        System.out.println("Inorder from paramaterized makeTree");
-//        newBTree.inOrder();
-//        System.out.println("Making a new tree");
+
         this.btree = newBTree;
-        //System.out.println("InOrder inside make tree");
+
+        this.setLengths(this.btree.getHeight());
         this.setSizeTreePane(this.btree.getHeight());
         this.btree.inOrder();
-        drawTree(btree.getRoot(), startX, startY, 300, 130, false);
-        //System.out.println(btree.getRoot());
+        drawTree(btree.getRoot(), startX, startY, lenX, lenY, false);
     }
 
     public void resetTree() {
         this.btree = new Operations<>();
         this.btree.clear();
-        drawTree(btree.getRoot(), startX, startY, 300, 130, false);
+        drawTree(btree.getRoot(), startX, startY, lenX, lenY, false);
     }
 }
