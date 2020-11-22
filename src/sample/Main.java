@@ -118,7 +118,7 @@ public class Main extends Application {
 
         ScrollPane sp = new ScrollPane();
         //sp.setPrefSize( primaryStage.getHeight(), primaryStage.getWidth());
-        System.out.println(primaryStage.getWidth());
+//        System.out.println(primaryStage.getWidth());
         BTREEPane = new TreeArea(btree, primaryStage.getWidth() / 2, 80);
         //sp.setPrefSize(300, 300);
         sp.setContent(BTREEPane);
@@ -143,36 +143,36 @@ public class Main extends Application {
     private void insertNode(String s) {
         try {
             int num = Integer.parseInt(s);
-            System.out.println("Node added is " + num);
+//            System.out.println("Node added is " + num);
             this.btree.add(addValue);
             addValue++;
             //addInput.setText("1");
-            System.out.println("First inorder");
-            this.btree.inOrder();
-            System.out.println("");
-            if (this.btree.isEmpty()) {
-                System.out.println("its empty qeqeqweqe ");
-            }
-            System.out.println("Getting root node inside insert node main function");
-            System.out.println(this.btree.getRoot().getRightElement());
-            if (this.btree.isEmpty()) {
-                System.out.println("its empty qeqeqweqasdasdasdasdase ");
-            }
+//            System.out.println("First inorder");
+//            this.btree.inOrder();
+//            System.out.println("");
+//            if (this.btree.isEmpty()) {
+////                System.out.println("its empty qeqeqweqe ");
+//            }
+//            System.out.println("Getting root node inside insert node main function");
+//            System.out.println(this.btree.getRoot().getRightElement());
+//            if (this.btree.isEmpty()) {
+//                System.out.println("its empty qeqeqweqasdasdasdasdase ");
+//            }
             BTREEPane.getChildren().clear();
 
-            System.out.println("Checking what children the tree has");
-            System.out.println("Root element is : " + this.btree.getRoot().getLeftElement());
-            System.out.println("Root, right element is : " + this.btree.getRoot().getRightElement());
-            System.out.println("Root, left child is : " + this.btree.getRoot().getLeftNode());
-            System.out.println("Root, middle child is : " + this.btree.getRoot().getMidNode());
-            System.out.println("Root, right child is : " + this.btree.getRoot().getRightNode());
+//            System.out.println("Checking what children the tree has");
+//            System.out.println("Root element is : " + this.btree.getRoot().getLeftElement());
+//            System.out.println("Root, right element is : " + this.btree.getRoot().getRightElement());
+//            System.out.println("Root, left child is : " + this.btree.getRoot().getLeftNode());
+//            System.out.println("Root, middle child is : " + this.btree.getRoot().getMidNode());
+//            System.out.println("Root, right child is : " + this.btree.getRoot().getRightNode());
 
             BTREEPane.makeTree(this.btree);
-            addInput.setText("1");
-            System.out.println("Goes here");
+            addInput.setText("");
+//            System.out.println("Goes here");
 
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input format !");
+//            System.out.println("Invalid input format !");
             Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid input format !");
             alert.show();
         }
@@ -181,10 +181,10 @@ public class Main extends Application {
     private void searchNode(String s) {
         try {
             int num = Integer.parseInt(s);
-            System.out.println("Node searched is " + num);
+//            System.out.println("Node searched is " + num);
 
             if (btree.contains(num)) {
-                System.out.println("Searching Now");
+//                System.out.println("Searching Now");
                 BTREEPane.searchTree(num);
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "The element does not exist !");
@@ -196,7 +196,7 @@ public class Main extends Application {
             //BTREEPane.makeTree(btree);
             addInput.setText("");
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input format !");
+//            System.out.println("Invalid input format !");
             Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid input format !");
             alert.show();
         }
@@ -205,14 +205,14 @@ public class Main extends Application {
     private void deleteNode(String s) {
         try {
             int num = Integer.parseInt(s);
-            System.out.println("Node deleted is " + num);
+//            System.out.println("Node deleted is " + num);
             btree.remove(num);
             BTREEPane.getChildren().clear();
             BTREEPane.makeTree(btree);
             addInput.setText("");
 
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input format !");
+//            System.out.println("Invalid input format !");
             Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid input format !");
             alert.show();
         }
@@ -221,14 +221,14 @@ public class Main extends Application {
 
     private void resetTree() {
         try {
-            System.out.println("Tree Reset");
+//            System.out.println("Tree Reset");
             btree.clear();
             BTREEPane.resetTree();
             BTREEPane.getChildren().clear();
             addInput.setText("");
 
         } catch (Exception e) {
-            System.out.println("Error occurred !");
+//            System.out.println("Error occurred !");
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error occurred !");
             alert.show();
         }
